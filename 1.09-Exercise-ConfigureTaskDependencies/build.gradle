@@ -33,12 +33,15 @@
 */
 
 task brew {
+group "brewing"
     doLast {
         println "Brewing. Drip, drip, drip."
     }
 }
 
 task pour {
+	dependsOn = ["brew"]
+ 
     doLast {
         println "Pouring. Glug, glug, glug."
     }
@@ -51,18 +54,22 @@ task addSweetener {
 }
 
 task drink {
+dependsOn pour
+    mustRunAfter addSweetener
     doLast {
         println "Drinking. Gulp, gulp, gulp."
     }
 }
 
 task blackCoffee {
+    dependsOn drink
     doLast {
         println "Mmmm, bitter! just how I like it."
     }
 }
 
 task sweetCoffee {
+	dependsOn drink, addSweetener
     doLast {
         println "Mmmm, sweet! just how I like it."
     }

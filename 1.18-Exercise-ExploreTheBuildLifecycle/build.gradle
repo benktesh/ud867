@@ -10,7 +10,6 @@ Exercises:
 2. Execute the "first" task and observe the output.
 3. Execute the "second" task and observe the output.
 
-*/
 
 println 'First top level script element'
 
@@ -31,3 +30,14 @@ task second(dependsOn: first) {
 }
 
 println 'Second top level script element'
+*/
+
+
+task test {
+    doLast {
+        println "1: I'm in ur action"
+    }
+    println "2: I'm in ur configuration closure"
+}
+println "3: I'm in ur build script"
+

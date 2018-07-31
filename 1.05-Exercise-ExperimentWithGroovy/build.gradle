@@ -12,6 +12,9 @@ or, more compactly
 
 */
 
+def foo="bar"
+println "$foo + foo = ${foo + "foo"}"
+
 task stringsAndTypes {
     doLast {
         // TODO: Run `$ gradle sAT`
