@@ -1,5 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,12 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-//imported java library
-import com.example.benktesh.libjavajoketelling.Joker;
+//imported  library
+import com.example.benktesh.libjavajoker.Joker;
+import com.example.benktesh.libandroidjoker.JokerActivity;
+import com.example.benktesh.libandroidjoker.Common;
 
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = MainActivity.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +49,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
+        String joke = "I do not have a joke";
         try {
             Joker joker = new Joker();
-            String joke = joker.getJoke();
-            Toast.makeText(this, joke, Toast.LENGTH_SHORT).show();
+            joke = joker.getJoke();
+            //Toast.makeText(this, joke, Toast.LENGTH_SHORT).show();
+
         }
         catch (Exception ex) {
             Log.e(TAG, "Could not get Joke" + ex.getMessage());
         }
+        launchJokeActivity(joke);
+
+    }
+
+    private void launchJokeActivity(String joke) {
+        Intent intent = new Intent(this, JokerActivity.class );
+        intent.putExtra(Common.JOKE, joke);
+        startActivity(intent);
     }
 
 }
