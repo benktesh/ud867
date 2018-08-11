@@ -1,4 +1,4 @@
-package com.example.benktesh.libjavajoketelling;
+package com.example.benktesh.libjavajoker;
 
 public class Joker {
 
