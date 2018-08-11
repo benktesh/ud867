@@ -2,13 +2,18 @@ package com.udacity.gradle.builditbigger;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+//imported java library
+import com.example.benktesh.libjavajoketelling.Joker;
+
 
 public class MainActivity extends AppCompatActivity {
+    private final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +45,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
+        try {
+            Joker joker = new Joker();
+            String joke = joker.getJoke();
+            Toast.makeText(this, joke, Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, "Could not get Joke" + ex.getMessage());
+        }
     }
-
 
 }
