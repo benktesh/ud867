@@ -46,6 +46,15 @@ To use our solution, uncomment the following line.
 
 // apply from:"solution.gradle"
 
+android {
+    buildTypes {
+        debug {
+            debuggable false
+            applicationIdSuffix "debug"
+        }
+    }
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
