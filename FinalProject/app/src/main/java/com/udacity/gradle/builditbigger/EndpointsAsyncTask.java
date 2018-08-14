@@ -18,13 +18,9 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import java.io.IOException;
 
 public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-    private AppCompatActivity activity;
     private MyApi myApiService = null;
     private Context context;
 
-    public EndpointsAsyncTask(AppCompatActivity mainActivity) {
-        this.activity = mainActivity;
-    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -65,6 +61,6 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
         Intent myIntent = new Intent(context, JokerActivity.class);
         myIntent.putExtra(Common.JOKE, result);
-        activity.startActivity(myIntent);
+        context.startActivity(myIntent);
     }
 }
