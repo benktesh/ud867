@@ -41,15 +41,12 @@ android {
         free {
             applicationId "com.udacity.gradle.builditbigger.free"
             dimension "tier"
-
         }
         paid {
             applicationId "com.udacity.gradle.builditbigger.paid"
             dimension "tier"
         }
-
     }
-
 }
 
 dependencies {

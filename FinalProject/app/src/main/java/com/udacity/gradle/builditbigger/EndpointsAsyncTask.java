@@ -33,9 +33,8 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     protected String doInBackground(Pair<Context, String>... params) {
         Log.d(TAG, "DoInBackground");
 
-
         if (myApiService == null) {  // Only do this once
-
+            //By default, remote is used. For testing, we will set the server to local
             if (rootURL == null) {
                 rootURL = Common.RemoteServer;
             }
@@ -55,7 +54,6 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
                         }
                     });
             // end options for devappserver
-
             myApiService = builder.build();
         }
 
@@ -72,10 +70,6 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
     @Override
     protected void onPostExecute(String result) {
-        //Log.d(TAG, result);
-        Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-        //launchJokeActivity(result);
-
         Intent myIntent = new Intent(context, JokerActivity.class);
         myIntent.putExtra(Common.JOKE, result);
         context.startActivity(myIntent);
