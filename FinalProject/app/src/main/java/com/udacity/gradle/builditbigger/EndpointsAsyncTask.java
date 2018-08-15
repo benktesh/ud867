@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Pair;
-import android.widget.Toast;
 
 import com.example.benktesh.libandroidjoker.Common;
 import com.example.benktesh.libandroidjoker.JokerActivity;
