@@ -3,17 +3,20 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Pair;
 
+import com.example.benktesh.libandroidjoker.Common;
+
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
-
 @RunWith(AndroidJUnit4.class)
 public class EndpointsAsyncTaskTest {
+
+    private final String TAG = EndpointsAsyncTaskTest.class.getSimpleName();
 
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -23,14 +26,18 @@ public class EndpointsAsyncTaskTest {
 
         try {
             EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask();
+            //Forcing to use dev server in test.
+            endpointsAsyncTask.setRootURL(Common.DevServer);
             endpointsAsyncTask.execute(new Pair<Context, String>(activityTestRule.getActivity(), "test"));
 
             Thread.sleep(5000);
-            assertTrue(endpointsAsyncTask.get() != null);
+            String result = endpointsAsyncTask.get();
+            Log.d(TAG, "Joke is " + result);
+            Assert.assertTrue("The retrieved joke must not be empty", result != null);
 
-        }
-        catch (Exception ex) {
-            assert (false);
+        } catch (Exception ex) {
+            //Log.d(TAG, "Test Failed");
+            Assert.fail("Test Failed due to exceptions ");
         }
 
     }
