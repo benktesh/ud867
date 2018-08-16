@@ -20,7 +20,7 @@ public class JokerActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String joke = getIntent().getStringExtra(Common.JOKE);
+        String joke = !getIntent().hasExtra(Common.JOKE) ? "" : getIntent().getStringExtra(Common.JOKE);
 
         Log.d(TAG, "onCreate " + joke);
 
