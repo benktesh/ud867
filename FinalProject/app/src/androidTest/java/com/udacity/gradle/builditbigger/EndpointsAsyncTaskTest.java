@@ -33,7 +33,10 @@ public class EndpointsAsyncTaskTest {
             Thread.sleep(5000);
             String result = endpointsAsyncTask.get();
             Log.d(TAG, "Joke is " + result);
-            Assert.assertTrue("The retrieved joke must not be empty", result != null);
+
+            Assert.assertFalse("The retrived joke is not an error text", result.equalsIgnoreCase(Common.AsyncError));
+            Assert.assertTrue("The retrieved joke must not be empty", result != null
+                    && !result.isEmpty() && result.length() > 0);
 
         } catch (Exception ex) {
             //Log.d(TAG, "Test Failed");

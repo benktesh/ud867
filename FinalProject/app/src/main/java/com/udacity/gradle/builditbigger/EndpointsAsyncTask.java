@@ -36,6 +36,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
             //By default, remote is used. For testing, we will set the server to local
             if (rootURL == null) {
                 rootURL = Common.RemoteServer;
+                //rootURL = Common.DevServer;
             }
             Log.d(TAG, "RootURL is " + rootURL);
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
@@ -62,8 +63,9 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
         try {
             String result = myApiService.sayHi(name).execute().getData();
             return result;
+
         } catch (IOException e) {
-            return e.getMessage();
+            return Common.AsyncError;
         }
     }
 
