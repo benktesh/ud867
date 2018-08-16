@@ -1,10 +1,12 @@
 package com.udacity.gradle.builditbigger;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.util.Pair;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.benktesh.libandroidjoker.Common;
 import com.example.benktesh.libandroidjoker.JokerActivity;
@@ -16,21 +18,36 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private final String TAG = EndpointsAsyncTask.class.getSimpleName();
 
     private MyApi myApiService = null;
     private Context context;
     private String rootURL;
+    private ProgressBar mProgressBar;
 
     public void setRootURL(String rootURL) {
         this.rootURL = rootURL;
     }
 
+    public EndpointsAsyncTask(Activity activity) {
+        context = activity;
+        mProgressBar = activity.findViewById(R.id.progressBar);
+
+    }
+
 
     @Override
-    protected String doInBackground(Context... params) {
+    protected void onPreExecute() {
+        super.onPreExecute();
+        mProgressBar.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    protected String doInBackground(Void... params) {
         Log.d(TAG, "DoInBackground");
+
 
         if (myApiService == null) {  // Only do this once
             //By default, remote is used. For testing, we will set the server to local
@@ -57,7 +74,6 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
             myApiService = builder.build();
         }
 
-        context = params[0];
         try {
             String result = myApiService.getJoke().execute().getData();
             //Thread.sleep(5000);
@@ -70,6 +86,7 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        mProgressBar.setVisibility(View.GONE);
         Intent myIntent = new Intent(context, JokerActivity.class);
         myIntent.putExtra(Common.JOKE, result);
         context.startActivity(myIntent);

@@ -1,12 +1,11 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 //imported  library
 
@@ -14,10 +13,14 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
     private final String TAG = MainActivity.class.getSimpleName();
 
+    private ProgressBar mProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //get hold of progressBar
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         // new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
     }
 
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        new EndpointsAsyncTask().execute(getApplicationContext());
+        new EndpointsAsyncTask(MainActivity.this).execute();
     }
 
 }

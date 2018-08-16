@@ -168,3 +168,8 @@ Once you have a functioning project, consider adding more features to test your 
 * Write a Gradle task that starts the GCE dev server, runs all the Android tests, and shuts down the dev server.
 
 Ready for Submission.
+
+Ready of Submission 2 (after review). Have one question though. I put forward this on slack but did not get any direction.
+Reviewer provided the following suggestion:
+    Most of the time is recommended to leave the responsibility of open a new activity to an activity lifecycle aware component, like the activity that calls this task. This especially helps to improve the UX under scenarios were the async task execution finished and the user did leave the app before that. With this implementation, the next activity may be opened no matter the user wants the result or not.
+I noticed that even when the app is in sleep mode, the asyc call will open the activity. I did that by putting a sleep of 10 seconds on thread and then pressed the home button. After 10 seconds the activity showed up without being asked. However, I did not quite get how to resolve it.

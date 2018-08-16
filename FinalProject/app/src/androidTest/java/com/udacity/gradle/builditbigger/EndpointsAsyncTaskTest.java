@@ -1,10 +1,9 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
+import android.support.test.annotation.UiThreadTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
-import android.util.Pair;
 
 import com.example.benktesh.libandroidjoker.Common;
 
@@ -22,13 +21,17 @@ public class EndpointsAsyncTaskTest {
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
+    @UiThreadTest
     public void jokeRetrievalTest() {
 
         try {
-            EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask();
+
+            //ProgressBar progressBar  = MainActivity.gfindViewById(R.id.progressBar);
+
+            EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(activityTestRule.getActivity());
             //Forcing to use dev server in test.
             endpointsAsyncTask.setRootURL(Common.DevServer);
-            endpointsAsyncTask.execute(activityTestRule.getActivity());
+            endpointsAsyncTask.execute();
 
             Thread.sleep(5000);
             String result = endpointsAsyncTask.get();
@@ -39,7 +42,7 @@ public class EndpointsAsyncTaskTest {
                     && !result.isEmpty() && result.length() > 0);
 
         } catch (Exception ex) {
-            //Log.d(TAG, "Test Failed");
+            Log.d(TAG, ex.getMessage());
             Assert.fail("Test Failed due to exceptions ");
         }
 

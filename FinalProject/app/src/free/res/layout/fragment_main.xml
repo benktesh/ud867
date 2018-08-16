@@ -25,6 +25,7 @@
         android:onClick="tellJoke"
         android:text="@string/button_text" />
 
-    <include layout="@layout/layout_adview" />
+    <include layout="@layout/layout_progressbar" />
 
+    <include layout="@layout/layout_adview" />
 </RelativeLayout>
