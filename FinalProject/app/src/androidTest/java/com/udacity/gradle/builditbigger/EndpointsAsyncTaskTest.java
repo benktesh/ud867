@@ -28,7 +28,7 @@ public class EndpointsAsyncTaskTest {
             EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask();
             //Forcing to use dev server in test.
             endpointsAsyncTask.setRootURL(Common.DevServer);
-            endpointsAsyncTask.execute(new Pair<Context, String>(activityTestRule.getActivity(), "test"));
+            endpointsAsyncTask.execute(activityTestRule.getActivity());
 
             Thread.sleep(5000);
             String result = endpointsAsyncTask.get();

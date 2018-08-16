@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(getApplicationContext(), "Manfred"));
+        new EndpointsAsyncTask().execute(getApplicationContext());
     }
 
 }

@@ -16,7 +16,7 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     private final String TAG = EndpointsAsyncTask.class.getSimpleName();
 
     private MyApi myApiService = null;
@@ -29,7 +29,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Context... params) {
         Log.d(TAG, "DoInBackground");
 
         if (myApiService == null) {  // Only do this once
@@ -57,7 +57,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
             myApiService = builder.build();
         }
 
-        context = params[0].first;
+        context = params[0];
         try {
             String result = myApiService.getJoke().execute().getData();
             //Thread.sleep(5000);
